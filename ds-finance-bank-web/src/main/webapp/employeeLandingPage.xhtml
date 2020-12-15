@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:f="http://java.sun.com/jsf/core"
+                xmlns:h="http://java.sun.com/jsf/html" xmlns:p="http://java.sun.com/jsf/html"
+                template="/WEB-INF/templates/default.xhtml">
+
+    <ui:define name="content">
+        <f:view>
+            <f:metadata>
+                <f:event type="preRenderView" listener="#{bankServiceJsfBean.loadUserData()}"/>
+            </f:metadata>
+        </f:view>
+
+        <ui:fragment rendered="#{bankServiceJsfBean.callerEmployee}">
+
+            <h:outputText
+                    value="Hello #{bankServiceJsfBean.userName}. You are logged in as an #{bankServiceJsfBean.userRole}."/>
+
+            <h:form id="searchForm">
+                <p>
+                    <h:panelGrid columns="2">
+                        <f:facet name="header">
+                            <h:outputLabel value="Search for Customers"/>
+                        </f:facet>
+                        <h:outputLabel value="First Name: "/>
+                        <p:inputText value="#{bankServiceJsfBean.searchCustomerFirstName}"/>
+                        <h:outputLabel value="Last Name: "/>
+                        <p:inputText value="#{bankServiceJsfBean.searchCustomerLastName}"/>
+                        <h:commandButton id="searchButton" action="#{bankServiceJsfBean.lookupCustomer()}"
+                                         value="Search"/>
+                        <h:messages styleClass="messages" errorClass="invalid" infoClass="valid" warnClass="warning"
+                                    globalOnly="true"/>
+                        <h:commandButton id="showAll" action="#{bankServiceJsfBean.showAllCustomers()}"
+                                         value="List All Customers"/>
+                        <h:messages styleClass="messages" errorClass="invalid" infoClass="valid" warnClass="warning"
+                                    globalOnly="true"/>
+                    </h:panelGrid>
+                </p>
+                <hr/>
+                <ui:fragment rendered="#{bankServiceJsfBean.resultsAvailable}">
+                    <table class="order-table">
+                        <tr>
+                            <th class="order-table-header">Kundennummer</th>
+                            <th class="order-table-header">Vorname</th>
+                            <th class="order-table-header">Nachname</th>
+                        </tr>
+                        <tbody>
+                        <ui:repeat var="c" value="#{bankServiceJsfBean.customerResults}" varStatus="status">
+                            <tr>
+                                <td class="order-table-even-row">#{c.id}</td>
+                                <td class="order-table-even-row">#{c.firstName}</td>
+                                <td class="order-table-even-row">#{c.lastName}</td>
+                            </tr>
+                        </ui:repeat>
+                        </tbody>
+                    </table>
+
+
+                </ui:fragment>
+            </h:form>
+            <hr/>
+            <h:form>
+                <h:panelGrid columns="2">
+                    <f:facet name="header">
+                        <h:outputLabel value="Create Customer"/>
+                    </f:facet>
+                    <h:outputLabel value="First Name: "/>
+                    <p:inputText value="#{bankServiceJsfBean.customerFirstName}"/>
+                    <h:outputLabel value="Last Name: "/>
+                    <p:inputText value="#{bankServiceJsfBean.customerLastName}"/>
+                    <f:facet name="footer">
+                        <h:commandButton action="#{bankServiceJsfBean.createCustomer()}" value="Create"/>
+                        <h:messages styleClass="messages" errorClass="invalid" infoClass="valid" warnClass="warning"
+                                    globalOnly="true"/>
+                    </f:facet>
+                </h:panelGrid>
+            </h:form>
+        </ui:fragment>
+
+        <ui:fragment rendered="#{!bankServiceJsfBean.callerEmployee}">
+            <h1> Permission denied. This page is for employees only.</h1>
+        </ui:fragment>
+
+    </ui:define>
+</ui:composition>
+
