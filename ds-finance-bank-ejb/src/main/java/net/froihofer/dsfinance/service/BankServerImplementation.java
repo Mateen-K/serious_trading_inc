@@ -71,7 +71,6 @@ public class BankServerImplementation implements BankServerInterface {
         } catch (TradingWSException_Exception e) {
             System.out.println(e.getMessage());
         }
-        //TODO: find better solution
        return null;
     }
 }

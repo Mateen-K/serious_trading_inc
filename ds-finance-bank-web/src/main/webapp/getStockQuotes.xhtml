@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:f="http://java.sun.com/jsf/core"
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:p="http://java.sun.com/jsf/html"
+                template="/WEB-INF/templates/default.xhtml">
+
+    <ui:define name="content">
+        <div class="container-md">
+            <h3> Get Stocks </h3>
+            <h:form>
+                <div class="form-group">
+                    <label for="CompanyName">Company Name</label>
+                    <p:inputText value="#{bankServiceJsfBean.companyQuery}" class="form-control"/>
+                </div>
+                <h:commandButton id="s" class="btn btn-info" action="#{bankServiceJsfBean.findCompanyByName()}"
+                                 value="Search"/>
+            </h:form>
+            <ui:fragment rendered="#{bankServiceJsfBean.companyResultsAvailable}">
+                <table class="table">
+                    <tr>
+                        <th>Firmenname</th>
+                        <th>Symbol</th>
+                        <th>Preis</th>
+                    </tr>
+                    <tbody>
+                    <ui:repeat var="c" value="#{bankServiceJsfBean.companyResults}" varStatus="status">
+                        <tr>
+                            <td>#{c.companyName}</td>
+                            <td>#{c.symbol}</td>
+                            <td>#{c.lastTradePrice}</td>
+                        </tr>
+                    </ui:repeat>
+                    </tbody>
+                </table>
+            </ui:fragment>
+        </div>
+    </ui:define>
+</ui:composition>

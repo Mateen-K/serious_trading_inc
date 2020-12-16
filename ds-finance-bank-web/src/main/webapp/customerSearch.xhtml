@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:f="http://java.sun.com/jsf/core"
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:p="http://java.sun.com/jsf/html"
+                template="/WEB-INF/templates/default.xhtml">
+
+
+    <ui:define name="content">
+        <f:view>
+            <f:metadata>
+                <f:event type="preRenderView" listener="#{bankServiceJsfBean.loadUserData()}"/>
+            </f:metadata>
+        </f:view>
+
+        <div class="container-md">
+            <ui:fragment rendered="#{bankServiceJsfBean.callerEmployee}">
+                <div class="alert alert-primary" role="alert">
+                    Welcome #{bankServiceJsfBean.userName}. You are logged in as an #{bankServiceJsfBean.userRole}.
+                </div>
+
+                <h3> Customer Search </h3>
+                <h:form id="df">
+                    <div class="form-group">
+                        <label for="Vorname">Vorname</label>
+                        <p:inputText value="#{bankServiceJsfBean.searchCustomerFirstName}" class="form-control"/>
+                    </div>
+                    <div class="form-group">
+                        <label for="Nachname">Nachname</label>
+                        <p:inputText value="#{bankServiceJsfBean.searchCustomerLastName}" class="form-control"/>
+                    </div>
+                    <h:commandButton id="searchCustomer" class="btn btn-info"
+                                     action="#{bankServiceJsfBean.lookupCustomer()}"
+                                     value="Search"/>
+                    <hr/>
+                    <h:commandButton id="showAll" class="btn btn-info" action="#{bankServiceJsfBean.showAllCustomers()}"
+                                     value="List All Customers"/>
+                </h:form>
+
+                <ui:fragment rendered="#{bankServiceJsfBean.resultsAvailable}">
+                    <table class="table">
+                        <thead>
+                        <tr>
+                            <th>Kundennummer</th>
+                            <th>Vorname</th>
+                            <th>Nachname</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <ui:repeat var="c" value="#{bankServiceJsfBean.customerResults}" varStatus="status">
+                            <tr>
+                                <td>#{c.id}</td>
+                                <td>#{c.firstName}</td>
+                                <td>#{c.lastName}</td>
+                            </tr>
+                        </ui:repeat>
+                        </tbody>
+                    </table>
+
+                </ui:fragment>
+            </ui:fragment>
+            <ui:fragment rendered="#{!bankServiceJsfBean.callerEmployee}">
+                <h1> Permission denied. This page is for employees only.</h1>
+            </ui:fragment>
+        </div>
+    </ui:define>
+</ui:composition>
+

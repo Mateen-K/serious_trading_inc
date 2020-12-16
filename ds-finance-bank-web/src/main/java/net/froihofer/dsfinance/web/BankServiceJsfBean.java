@@ -21,12 +21,12 @@ public class BankServiceJsfBean {
     private String userName, userRole, customerFirstName, customerLastName,
             searchCustomerFirstName, searchCustomerLastName, companyQuery;
     private List<Customer> customerResults;
-    private boolean resultsAvailable;
+    private boolean resultsAvailable, companyResultsAvailable;
     private List<PublicStockQuote> companyResults;
 
     //checks Role of User and redirects to the appropriate landing page
     public void redirect() throws IOException {
-        String targetPage = bank.isCallerEmployee() ? "employeeLandingPage.xhtml" : "depot.xhtml";
+        String targetPage = bank.isCallerEmployee() ? "customerSearch.xhtml" : "portfolio.xhtml";
         FacesContext.getCurrentInstance().getExternalContext().redirect(targetPage);
     }
 
@@ -58,7 +58,9 @@ public class BankServiceJsfBean {
     }
 
     public void findCompanyByName(){
-         companyResults = bank.findCompaniesByName(companyQuery);
+        companyResultsAvailable = false;
+        companyResults = bank.findCompaniesByName(companyQuery);
+        companyResultsAvailable = true;
     }
 
 
@@ -76,6 +78,10 @@ public class BankServiceJsfBean {
 
     public boolean isResultsAvailable() {
         return resultsAvailable;
+    }
+
+    public boolean isCompanyResultsAvailable() {
+        return companyResultsAvailable;
     }
 
     public List<Customer> getCustomerResults() {

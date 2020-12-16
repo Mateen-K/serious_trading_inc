@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:f="http://java.sun.com/jsf/core"
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:p="http://java.sun.com/jsf/html"
+                template="/WEB-INF/templates/default.xhtml">
+
+    <ui:define name="content">
+        <div class="container-md">
+            <ui:fragment rendered="#{bankServiceJsfBean.callerEmployee}">
+                <h3> Create Customer </h3>
+                <h:form>
+                    <div class="form-group">
+                        <label for="Vorname">Vorname</label>
+                        <p:inputText value="#{bankServiceJsfBean.customerFirstName}" class="form-control"/>
+                    </div>
+                    <div class="form-group">
+                        <label for="Nachname">Nachname</label>
+                        <p:inputText value="#{bankServiceJsfBean.customerLastName}" class="form-control"/>
+                    </div>
+                    <h:commandButton id="createCustomer" class="btn btn-info"
+                                     action="#{bankServiceJsfBean.createCustomer()}"
+                                     value="Create Customer"/>
+                </h:form>
+            </ui:fragment>
+            <ui:fragment rendered="#{!bankServiceJsfBean.callerEmployee}">
+                <h1> Permission denied. This page is for employees only.</h1>
+            </ui:fragment>
+        </div>
+    </ui:define>
+</ui:composition>

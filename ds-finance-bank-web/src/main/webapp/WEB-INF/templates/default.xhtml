@@ -1,17 +1,49 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
-    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml"
-   xmlns:h="http://java.sun.com/jsf/html"
-   xmlns:ui="http://java.sun.com/jsf/facelets">
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:ui="http://java.sun.com/jsf/facelets">
 <h:head>
-   <title><ui:insert name="title">Serious Trading Inc.</ui:insert></title>
-   <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title><ui:insert name="title">Serious Trading Inc.</ui:insert></title>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
+          integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous"/>
+
+
+    <nav class="navbar navbar-expand-lg">
+        <div class="container-fluid">
+            <div class="navbar-header">
+                <a class="navbar-brand">Serious Trading Inc</a>
+            </div>
+            <h:form>
+                <ul class="nav navbar-nav">
+                    <ui:fragment rendered="#{bankServiceJsfBean.callerEmployee}">
+                        <li><h:commandButton class="btn btn-info" action="customerSearch"
+                                             value="Customer Search"/>
+                        </li>
+                        <li><h:commandButton class="btn btn-info" action="createCustomer"
+                                             value="Create Customer"/>
+                        </li>
+                    </ui:fragment>
+                    <ui:fragment rendered="#{!bankServiceJsfBean.callerEmployee}">
+                        <li><h:commandButton class="btn btn-info" action="portfolio" value="Portfolio"/>
+                        </li>
+                    </ui:fragment>
+                    <li><h:commandButton class="btn btn-info" action="getStockQuotes"
+                                         value="Get Stock Quotes"/>
+                    </li>
+                </ul>
+            </h:form>
+        </div>
+    </nav>
 </h:head>
+
+
 <h:body>
-  <div id="content">
-	  <ui:insert name="content">
-	             [Template content will be inserted here]
-	  </ui:insert>
-   </div>
+    <div id="content">
+        <ui:insert name="content">
+            [Template content will be inserted here]
+        </ui:insert>
+    </div>
 </h:body>
 </html>
