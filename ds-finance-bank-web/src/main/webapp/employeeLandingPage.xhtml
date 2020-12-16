@@ -3,8 +3,10 @@
 <ui:composition xmlns="http://www.w3.org/1999/xhtml"
                 xmlns:ui="http://java.sun.com/jsf/facelets"
                 xmlns:f="http://java.sun.com/jsf/core"
-                xmlns:h="http://java.sun.com/jsf/html" xmlns:p="http://java.sun.com/jsf/html"
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:p="http://java.sun.com/jsf/html"
                 template="/WEB-INF/templates/default.xhtml">
+
 
     <ui:define name="content">
         <f:view>
@@ -38,7 +40,6 @@
                                     globalOnly="true"/>
                     </h:panelGrid>
                 </p>
-                <hr/>
                 <ui:fragment rendered="#{bankServiceJsfBean.resultsAvailable}">
                     <table class="order-table">
                         <tr>
@@ -77,6 +78,42 @@
                     </f:facet>
                 </h:panelGrid>
             </h:form>
+
+            <hr/>
+            <h:form>
+                <h:panelGrid columns="2">
+                    <f:facet name="header">
+                        <h:outputLabel value="Look up Companies"/>
+                    </f:facet>
+                    <h:outputLabel value="Company Name: "/>
+                    <p:inputText value="#{bankServiceJsfBean.companyQuery}"/>
+                    <f:facet name="footer">
+                        <h:commandButton action="#{bankServiceJsfBean.findCompanyByName()}" value="Find Companies"/>
+                        <h:messages styleClass="messages" errorClass="invalid" infoClass="valid" warnClass="warning"
+                                    globalOnly="true"/>
+                    </f:facet>
+                </h:panelGrid>
+            </h:form>
+
+
+            <table class="order-table">
+                <tr>
+                    <th class="order-table-header">Firmenname</th>
+                    <th class="order-table-header">Symbol</th>
+                    <th class="order-table-header">Preis</th>
+                </tr>
+                <tbody>
+                <ui:repeat var="c" value="#{bankServiceJsfBean.companyResults}" varStatus="status">
+                    <tr>
+                        <td class="order-table-even-row">#{c.companyName}</td>
+                        <td class="order-table-even-row">#{c.symbol}</td>
+                        <td class="order-table-even-row">#{c.lastTradePrice}</td>
+                    </tr>
+                </ui:repeat>
+                </tbody>
+            </table>
+
+
         </ui:fragment>
 
         <ui:fragment rendered="#{!bankServiceJsfBean.callerEmployee}">

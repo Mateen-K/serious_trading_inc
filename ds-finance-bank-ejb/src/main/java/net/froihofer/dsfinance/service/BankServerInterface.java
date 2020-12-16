@@ -1,6 +1,8 @@
 package net.froihofer.dsfinance.service;
 
 import net.froihofer.dsfinance.entity.Customer;
+import net.froihofer.dsfinance.ws.trading.PublicStockQuote;
+import net.froihofer.dsfinance.ws.trading.TradingWSException_Exception;
 
 import java.util.List;
 import java.util.Map;
@@ -16,4 +18,6 @@ public interface BankServerInterface {
     public List<Customer> findCustomers(String lastName, String firstName);
 
     public List<Customer> findAllCustomers();
+
+    public List<PublicStockQuote> findCompaniesByName(String query);
 }

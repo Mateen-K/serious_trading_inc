@@ -2,6 +2,8 @@ package net.froihofer.dsfinance.web;
 
 import net.froihofer.dsfinance.service.BankServerInterface;
 import net.froihofer.dsfinance.entity.Customer;
+import net.froihofer.dsfinance.ws.trading.PublicStockQuote;
+import net.froihofer.dsfinance.ws.trading.TradingWSException_Exception;
 
 import javax.ejb.EJB;
 import javax.faces.bean.ManagedBean;
@@ -16,9 +18,11 @@ import java.util.Map;
 public class BankServiceJsfBean {
     @EJB
     BankServerInterface bank;
-    private String userName, userRole, customerFirstName, customerLastName, searchCustomerFirstName, searchCustomerLastName;
+    private String userName, userRole, customerFirstName, customerLastName,
+            searchCustomerFirstName, searchCustomerLastName, companyQuery;
     private List<Customer> customerResults;
     private boolean resultsAvailable;
+    private List<PublicStockQuote> companyResults;
 
     //checks Role of User and redirects to the appropriate landing page
     public void redirect() throws IOException {
@@ -51,6 +55,10 @@ public class BankServiceJsfBean {
         resultsAvailable = false;
         customerResults = bank.findAllCustomers();
         resultsAvailable = true;
+    }
+
+    public void findCompanyByName(){
+         companyResults = bank.findCompaniesByName(companyQuery);
     }
 
 
@@ -105,4 +113,17 @@ public class BankServiceJsfBean {
     public void setSearchCustomerLastName(String searchCustomerLastName) {
         this.searchCustomerLastName = searchCustomerLastName;
     }
+
+    public String getCompanyQuery() {
+        return companyQuery;
+    }
+
+    public void setCompanyQuery(String companyQuery) {
+        this.companyQuery = companyQuery;
+    }
+
+    public List<PublicStockQuote> getCompanyResults() {
+        return companyResults;
+    }
+
 }
