@@ -9,6 +9,7 @@ import net.froihofer.dsfinance.ws.trading.TradingWebServiceService;
 
 import javax.annotation.Resource;
 import javax.annotation.security.PermitAll;
+import javax.annotation.security.RolesAllowed;
 import javax.ejb.SessionContext;
 import javax.ejb.Stateless;
 import javax.inject.Inject;
@@ -28,8 +29,6 @@ public class BankServerImplementation implements BankServerInterface {
     @Inject
     CustomerDAO customerDAO;
 
-
-
     // gets login information so employees can be greeted
     public Map<String, String> getCallerInfo() {
         Map<String, String> temp = new HashMap<String, String>();
@@ -42,14 +41,18 @@ public class BankServerImplementation implements BankServerInterface {
         return ctx.isCallerInRole("bank");
     }
 
+    @RolesAllowed("bank")
     public void createCustomer(String firstName, String lastName) {
         customerDAO.persist(new Customer(firstName, lastName));
     }
 
+    @RolesAllowed("bank")
     public List<Customer> findCustomers(String lastName, String firstName) {
         return customerDAO.findCustomers(lastName, firstName);
     }
 
+
+    @RolesAllowed("bank")
     public List<Customer> findAllCustomers() {
         return customerDAO.findAllCustomers();
     }
