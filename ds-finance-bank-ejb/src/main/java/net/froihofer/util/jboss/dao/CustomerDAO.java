@@ -8,8 +8,16 @@ import javax.persistence.PersistenceContext;
 public class CustomerDAO {
   @PersistenceContext private EntityManager entityManager;
   
-  public Customer findById(String name) {
-    return entityManager.find(Customer.class, name);
+  public Customer getById(int id) {
+    return entityManager.find(Customer.class, id);
+  }
+
+  public Customer getByFirstName(String firstName) {
+    return entityManager.find(Customer.class, firstName);
+  }
+
+  public Customer getByLastName(String lastName) {
+    return entityManager.find(Customer.class, lastName);
   }
   
   public void persist(Customer customer) {
