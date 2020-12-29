@@ -24,12 +24,6 @@ public class BankServiceJsfBean {
     private boolean resultsAvailable, companyResultsAvailable;
     private List<PublicStockQuote> companyResults;
 
-    //checks Role of User and redirects to the appropriate landing page
-    public void redirect() throws IOException {
-        String targetPage = bank.isCallerEmployee() ? "customerSearch.xhtml" : "portfolio.xhtml";
-        FacesContext.getCurrentInstance().getExternalContext().redirect(targetPage);
-    }
-
     //used for welcome messages atm
     public void loadUserData() {
         Map<String, String> userInfo = bank.getCallerInfo();
