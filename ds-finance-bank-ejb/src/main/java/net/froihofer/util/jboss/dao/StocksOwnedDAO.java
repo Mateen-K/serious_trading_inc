@@ -1,6 +1,5 @@
 package net.froihofer.util.jboss.dao;
 
-import net.froihofer.util.jboss.entity.SecuritiesAccount;
 import net.froihofer.util.jboss.entity.StocksOwned;
 
 import javax.persistence.EntityManager;

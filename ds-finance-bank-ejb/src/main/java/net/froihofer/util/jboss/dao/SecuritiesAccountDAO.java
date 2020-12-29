@@ -15,6 +15,12 @@ public class SecuritiesAccountDAO{
         return entityManager.find(SecuritiesAccount.class, id);
     }
 
+    public SecuritiesAccount findByCustomer(Customer customer) {
+        return entityManager.createQuery("FROM StocksOwned x "+
+                        "WHERE x.customer = :customer ",
+                StocksOwned.class).setParameter("customer", customer)
+    }
+
     public void persist(SecuritiesAccount account) {
         entityManager.persist(account);
     }

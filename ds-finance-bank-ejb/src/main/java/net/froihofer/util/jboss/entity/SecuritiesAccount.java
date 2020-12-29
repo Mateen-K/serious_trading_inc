@@ -16,7 +16,7 @@ public class SecuritiesAccount implements Serializable {
     private BigDecimal currentValue;
 
     @OneToOne
-    @JoinColumn
+    @JoinColumn(name ="Customer_FK")
     private Customer customer;
 
     @OneToMany(mappedBy = "securitiesAccount")
