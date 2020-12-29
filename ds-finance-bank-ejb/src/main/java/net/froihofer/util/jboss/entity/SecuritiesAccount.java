@@ -4,6 +4,8 @@ import javax.persistence.*;
 import java.io.Serializable;
 import java.math.BigDecimal;
 import java.util.List;
+import javax.persistence.Table;
+import javax.persistence.Column;
 
 @Entity
 @Table(name="SecuritiesAccount")
@@ -15,12 +17,9 @@ public class SecuritiesAccount implements Serializable {
 
     @OneToOne
     @JoinColumn
-//    @Column
     private Customer customer;
 
     @OneToMany(mappedBy = "securitiesAccount")
-//    @OneToMany
-//    @Column
     private List<StocksOwned> stocks;
 
     public SecuritiesAccount(){

@@ -5,11 +5,12 @@ import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
+
 @Entity
 @Table(name="BankVolume")
 public class BankVolume {
     @Id
-    private String id;
+    private int id;
     @Column
     private int max;
     @Column
@@ -18,17 +19,17 @@ public class BankVolume {
     public  BankVolume(){
     }
 
-    public BankVolume(String id, int max, int current) {
+    public BankVolume(int id, int max, int current) {
         this.id = id;
         this.max = max;
         this.current = current;
     }
 
-    public String getId() {
+    public int getId() {
         return id;
     }
 
-    public void setId(String id) {
+    public void setId(int id) {
         this.id = id;
     }
 

@@ -5,6 +5,8 @@ package net.froihofer.util.jboss.entity;
 import javax.persistence.*;
 import java.io.Serializable;
 import java.util.List;
+import javax.persistence.Table;
+import javax.persistence.Column;
 
 @Entity
 @Table(name="Customer")

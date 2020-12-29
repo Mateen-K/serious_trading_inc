@@ -2,6 +2,8 @@ package net.froihofer.util.jboss.entity;
 
 import javax.persistence.*;
 import java.io.Serializable;
+import javax.persistence.Table;
+import javax.persistence.Column;
 
 @Entity
 @Table(name="Address")
