@@ -1,25 +1,34 @@
 package net.froihofer.util.jboss.entity;
 
+import org.hibernate.validator.constraints.NotEmpty;
+
 import javax.persistence.*;
 import java.io.Serializable;
 import java.math.BigDecimal;
-import java.util.Date;
+import java.time.LocalDate;
 import javax.persistence.Table;
 import javax.persistence.Column;
+import javax.validation.constraints.Past;
 
 @Entity
 @Table(name="StockOwned")
 public class StocksOwned implements Serializable {
     @Id
     private String symbol;
+    @NotEmpty
     @Column
     private String companyName;
+    @NotEmpty
     @Column
     private int sharesOwnedNo;
+    @NotEmpty
     @Column
     private BigDecimal shareValue;
+    @Past
+    @NotEmpty
     @Column
-    private Date updatedOn;
+    private LocalDate updatedOn;
+    @NotEmpty
     @ManyToOne
     @JoinColumn(name ="SecuritiesAccount_FK")
     private SecuritiesAccount securitiesAccount;
@@ -27,12 +36,13 @@ public class StocksOwned implements Serializable {
     public StocksOwned(){
     }
 
-    public StocksOwned(String symbol, String companyName, int sharesOwnedNo, BigDecimal shareValue, Date updatedOn) {
+    public StocksOwned(String symbol, String companyName, int sharesOwnedNo, BigDecimal shareValue, LocalDate updatedOn, SecuritiesAccount securitiesAccount) {
         this.symbol = symbol;
         this.companyName = companyName;
         this.sharesOwnedNo = sharesOwnedNo;
         this.shareValue = shareValue;
         this.updatedOn = updatedOn;
+        this.securitiesAccount = securitiesAccount;
     }
 
     public String getSymbol() {
@@ -67,11 +77,19 @@ public class StocksOwned implements Serializable {
         this.shareValue = shareValue;
     }
 
-    public Date getUpdatedOn() {
+    public LocalDate getUpdatedOn() {
         return updatedOn;
     }
 
-    public void setUpdatedOn(Date updatedOn) {
+    public void setUpdatedOn(LocalDate updatedOn) {
         this.updatedOn = updatedOn;
+    }
+
+    public SecuritiesAccount getSecuritiesAccount() {
+        return securitiesAccount;
+    }
+
+    public void setSecuritiesAccount(SecuritiesAccount securitiesAccount) {
+        this.securitiesAccount = securitiesAccount;
     }
 }

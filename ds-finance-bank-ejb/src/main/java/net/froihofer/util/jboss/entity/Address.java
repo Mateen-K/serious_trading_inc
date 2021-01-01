@@ -1,5 +1,7 @@
 package net.froihofer.util.jboss.entity;
 
+import org.hibernate.validator.constraints.NotEmpty;
+
 import javax.persistence.*;
 import java.io.Serializable;
 import javax.persistence.Table;
@@ -10,19 +12,25 @@ import javax.persistence.Column;
 public class Address implements Serializable {
     @Id
     private int id;
+    @NotEmpty
     @Column
     private String street;
+    @NotEmpty
     @Column
     private int houseNo;
+    @NotEmpty
     @Column
     private String appartmentNo;
+    @NotEmpty
     @Column
     private String zipCode;
+    @NotEmpty
     @Column
     private String city;
+    @NotEmpty
     @Column
     private String country;
-
+    @NotEmpty
     @ManyToOne
     @JoinColumn(name ="Customer_FK")
     private Customer customer;

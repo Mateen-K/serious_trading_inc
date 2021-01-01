@@ -1,5 +1,7 @@
 package net.froihofer.util.jboss.entity;
 
+import org.hibernate.validator.constraints.NotEmpty;
+
 import javax.persistence.*;
 import java.io.Serializable;
 import java.math.BigDecimal;
@@ -12,14 +14,16 @@ import javax.persistence.Column;
 public class SecuritiesAccount implements Serializable {
     @Id
     private int id;
+    @NotEmpty
     @Column
     private BigDecimal currentValue;
-
+    @NotEmpty
     @OneToOne
-    @JoinColumn(name ="Customer_FK")
+    @JoinColumn(name = "Customer_FK")
     private Customer customer;
-
+    @NotEmpty
     @OneToMany(mappedBy = "securitiesAccount")
+    @OrderBy("companyName")
     private List<StocksOwned> stocks;
 
     public SecuritiesAccount(){

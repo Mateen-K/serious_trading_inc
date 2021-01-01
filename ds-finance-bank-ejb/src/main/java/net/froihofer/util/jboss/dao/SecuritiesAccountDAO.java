@@ -1,7 +1,9 @@
 package net.froihofer.util.jboss.dao;
 
 
+import net.froihofer.util.jboss.entity.Customer;
 import net.froihofer.util.jboss.entity.SecuritiesAccount;
+import net.froihofer.util.jboss.entity.StocksOwned;
 
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
@@ -16,9 +18,9 @@ public class SecuritiesAccountDAO{
     }
 
     public SecuritiesAccount findByCustomer(Customer customer) {
-        return entityManager.createQuery("FROM StocksOwned x "+
+        return entityManager.createQuery("FROM SecuritiesAccount x "+
                         "WHERE x.customer = :customer ",
-                StocksOwned.class).setParameter("customer", customer)
+                SecuritiesAccount.class).setParameter("customer", customer).getSingleResult();
     }
 
     public void persist(SecuritiesAccount account) {
