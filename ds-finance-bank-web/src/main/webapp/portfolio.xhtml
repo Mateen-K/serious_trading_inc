@@ -10,26 +10,53 @@
 
         <f:view>
             <f:metadata>
-                <f:event type="preRenderView" listener="#{bankServiceJsfBean.loadUserData()}"/>
+                <f:event type="preRenderView" listener="#{portfolioBean.loadUserData()}"/>
             </f:metadata>
         </f:view>
 
         <div class="container-md">
-            <ui:fragment rendered="#{bankServiceJsfBean.callerEmployee}">
+            <ui:fragment rendered="#{portfolioBean.callerEmployee}">
                 <h:panelGrid columns="2">
                     <h:outputText
-                            value="Hello #{bankServiceJsfBean.userName}. You are logged in as an #{bankServiceJsfBean.userRole}."/>
+                            value="Hello #{portfolioBean.userName}. You are logged in as an #{portfolioBean.userRole}."/>
                     <h:outputText
                             value="Below you can find the portfolio of user xx"/>
                 </h:panelGrid>
             </ui:fragment>
 
-            <ui:fragment rendered="#{!bankServiceJsfBean.callerEmployee}">
+            <ui:fragment rendered="#{!portfolioBean.callerEmployee}">
                 <div class="alert alert-primary" role="alert">
-                    Hello #{bankServiceJsfBean.userName}. You are logged in as a #{bankServiceJsfBean.userRole}.
+                    Hello #{portfolioBean.userName}. You are logged in as a #{portfolioBean.userRole}.
                     Below you can find your portfolio.
                 </div>
             </ui:fragment>
+
+
+        <ui:fragment rendered="#{portfolioBean.securitiesAccountResultsAvailable}">
+            <table class="table">
+                <thead>
+                <tr>
+                    <th>Symbol</th>
+                    <th>Company Name</th>
+                    <th># of Share Owned</th>
+                    <th>Share Value</th>
+                    <th>Updated on</th>
+                </tr>
+                </thead>
+                <tbody>
+                <ui:repeat var="sa" value="#{portfolioBean.SecuritiesAccountResults}" varStatus="status">
+                    <tr>
+                        <td>#{sa.symbol}</td>
+                        <td>#{sa.companyName}</td>
+                        <td>#{sa.noSharesOwned}</td>
+                        <td>#{sa.shareValue}</td>
+                        <td>#{sa.updatedOn}</td>
+                    </tr>
+                </ui:repeat>
+                </tbody>
+            </table>
+
+        </ui:fragment>
         </div>
     </ui:define>
 </ui:composition>

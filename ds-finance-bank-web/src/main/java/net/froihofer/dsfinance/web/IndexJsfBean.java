@@ -14,6 +14,10 @@ public class IndexJsfBean {
     @EJB
     BankServerInterface bank;
 
+    public boolean isCallerEmployee() {
+        return bank.isCallerEmployee();
+    }
+
     public void redirect() throws IOException {
         String targetPage = bank.isCallerEmployee() ? "customerSearch.xhtml" : "portfolio.xhtml";
         FacesContext.getCurrentInstance().getExternalContext().redirect(targetPage);
