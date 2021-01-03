@@ -114,6 +114,17 @@ public class BankServiceJsfBean {
         this.searchCustomerLastName = searchCustomerLastName;
     }
 
+    public String getCompanyQuery() {
+        return companyQuery;
+    }
+
+    public void setCompanyQuery(String companyQuery) {
+        this.companyQuery = companyQuery;
+    }
+
+    public List<PublicStockQuote> getCompanyResults() {
+        return companyResults;
+    }
 
 
 }

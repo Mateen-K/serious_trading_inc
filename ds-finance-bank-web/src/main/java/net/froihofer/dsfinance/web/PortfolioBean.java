@@ -3,6 +3,7 @@ package net.froihofer.dsfinance.web;
 import net.froihofer.dsfinance.service.BankServerInterface;
 import net.froihofer.dsfinance.ws.trading.PublicStockQuote;
 
+import javax.ejb.EJB;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.RequestScoped;
 import java.math.BigDecimal;
@@ -13,6 +14,7 @@ import java.util.Map;
 @ManagedBean
 @RequestScoped
 public class PortfolioBean {
+    @EJB
     BankServerInterface bank;
     private List<PublicStockQuote> SecuritiesAccountResults;
     private String companyQuery, userName, userRole, symbol, companyName;
@@ -42,7 +44,7 @@ public class PortfolioBean {
         return userRole;
     }
 
-    public String getSecuritiesAccount() {
+    public String getSecuritiesAccount(int userId) {
         return companyQuery;
     }
 

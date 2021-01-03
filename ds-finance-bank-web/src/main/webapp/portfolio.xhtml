@@ -10,29 +10,29 @@
 
         <f:view>
             <f:metadata>
-                <f:event type="preRenderView" listener="#{portfolioBean.loadUserData()}"/>
+                <f:event type="preRenderView" listener="#{PortfolioBean.loadUserData()}"/>
             </f:metadata>
         </f:view>
 
         <div class="container-md">
-            <ui:fragment rendered="#{portfolioBean.callerEmployee}">
+            <ui:fragment rendered="#{PortfolioBean.callerEmployee}">
                 <h:panelGrid columns="2">
                     <h:outputText
-                            value="Hello #{portfolioBean.userName}. You are logged in as an #{portfolioBean.userRole}."/>
+                            value="Hello #PortfolioBean.userName}. You are logged in as an #{PortfolioBean.userRole}."/>
                     <h:outputText
                             value="Below you can find the portfolio of user xx"/>
                 </h:panelGrid>
             </ui:fragment>
 
-            <ui:fragment rendered="#{!portfolioBean.callerEmployee}">
+            <ui:fragment rendered="#{!PortfolioBean.callerEmployee}">
                 <div class="alert alert-primary" role="alert">
-                    Hello #{portfolioBean.userName}. You are logged in as a #{portfolioBean.userRole}.
-                    Below you can find your portfolio.
+                    Hello #{PortfolioBean.userName}. You are logged in as a #{PortfolioBean.userRole}.
+                    Below you can find your Portfolio.
                 </div>
             </ui:fragment>
 
 
-        <ui:fragment rendered="#{portfolioBean.securitiesAccountResultsAvailable}">
+        <ui:fragment rendered="#{PortfolioBean.securitiesAccountResultsAvailable}">
             <table class="table">
                 <thead>
                 <tr>
@@ -44,7 +44,7 @@
                 </tr>
                 </thead>
                 <tbody>
-                <ui:repeat var="sa" value="#{portfolioBean.SecuritiesAccountResults}" varStatus="status">
+                <ui:repeat var="sa" value="#{PortfolioBean.SecuritiesAccountResults}" varStatus="status">
                     <tr>
                         <td>#{sa.symbol}</td>
                         <td>#{sa.companyName}</td>
