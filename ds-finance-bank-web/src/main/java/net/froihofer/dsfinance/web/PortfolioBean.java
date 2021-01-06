@@ -44,7 +44,7 @@ public class PortfolioBean {
         return userRole;
     }
 
-    public String getSecuritiesAccount(int userId) {
+    public String getSecuritiesAccount(int customerId) {
         return companyQuery;
     }
 

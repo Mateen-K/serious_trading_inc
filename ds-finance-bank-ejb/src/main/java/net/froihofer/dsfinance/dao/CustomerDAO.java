@@ -14,7 +14,7 @@ public class CustomerDAO{
     return entityManager.find(Customer.class, id);
   }
 
-  public List<Customer> findAll() {
+  public List<Customer> findAllCustomers() {
     return entityManager.createQuery("SELECT x FROM Customer x", Customer.class).getResultList();
   }
 

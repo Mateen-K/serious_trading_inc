@@ -1,12 +1,12 @@
 package net.froihofer.dsfinance.service;
 
+import net.froihofer.dsfinance.entity.Address;
 import net.froihofer.dsfinance.entity.Customer;
 import net.froihofer.dsfinance.entity.SecuritiesAccount;
 import net.froihofer.dsfinance.exceptions.UnauthorizedException;
 import net.froihofer.dsfinance.ws.trading.PublicStockQuote;
 
 import javax.ejb.Remote;
-import javax.mail.Address;
 import java.math.BigDecimal;
 import java.util.List;
 import java.util.Map;
@@ -26,7 +26,7 @@ public interface BankServerInterface {
 
     public SecuritiesAccount getSecuritiesAccount(int customerId) throws UnauthorizedException;
 
-    public int createCustomerAccount(String firstName, String lastName, Address address, String username, String password) throws UnauthorizedException;
+    public void createCustomerAccount(String firstName, String lastName, String username, Address address, String password, SecuritiesAccount securitiesAccount) throws UnauthorizedException;
     public List<Customer> findAllCustomers();
     public List<Customer> findCustomers(String lastName, String firstName);
 

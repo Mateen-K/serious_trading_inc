@@ -31,8 +31,8 @@ public class Address implements Serializable {
     @Column
     private String country;
     @NotEmpty
-    @ManyToOne
-    @JoinColumn(name ="Customer_FK")
+    @OneToOne
+    @JoinColumn(name = "Customer_FK")
     private Customer customer;
 
     public Address(){

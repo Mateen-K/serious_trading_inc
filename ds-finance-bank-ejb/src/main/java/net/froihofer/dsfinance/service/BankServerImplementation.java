@@ -1,7 +1,11 @@
 package net.froihofer.dsfinance.service;
 
-import net.froihofer.dsfinance.entity.Customer1;
-import net.froihofer.dsfinance.dao.CustomerDAO1;
+import net.froihofer.dsfinance.dao.CustomerDAO;
+import net.froihofer.dsfinance.dao.SecuritiesAccountDAO;
+import net.froihofer.dsfinance.entity.Address;
+import net.froihofer.dsfinance.entity.Customer;
+import net.froihofer.dsfinance.entity.SecuritiesAccount;
+import net.froihofer.dsfinance.exceptions.UnauthorizedException;
 import net.froihofer.dsfinance.ws.trading.PublicStockQuote;
 import net.froihofer.dsfinance.ws.trading.TradingWSException_Exception;
 import net.froihofer.dsfinance.ws.trading.TradingWebService;
@@ -14,6 +18,7 @@ import javax.ejb.SessionContext;
 import javax.ejb.Stateless;
 import javax.inject.Inject;
 import javax.xml.ws.BindingProvider;
+import java.math.BigDecimal;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -26,7 +31,10 @@ public class BankServerImplementation implements BankServerInterface {
     @Resource
     private SessionContext ctx;
     @Inject
-    CustomerDAO1 customerDAO;
+    CustomerDAO customerDAO;
+    @Inject
+    SecuritiesAccountDAO securitiesAccountDAO;
+
 
     // gets login information so employees can be greeted
     public Map<String, String> getCallerInfo() {
@@ -40,19 +48,55 @@ public class BankServerImplementation implements BankServerInterface {
         return ctx.isCallerInRole("bank");
     }
 
-    @RolesAllowed("bank")
-    public void createCustomer(String firstName, String lastName) {
-        customerDAO.persist(new Customer1(firstName, lastName));
+    @Override
+    public List<PublicStockQuote> getStocksByName(String companyName) {
+        //TODO get from TradingService
+        return null;
+    }
+
+    @Override
+    public List<PublicStockQuote> getStocksBySymbol(String companySymbol) {
+        //TODO get from TradingService
+        return null;
+    }
+
+    @Override
+    public BigDecimal buyStock(String stockSymbol, int noShares, int customerId) throws UnauthorizedException {
+        //TODO buy from TradingService
+        return null;
+    }
+
+    @Override
+    public BigDecimal sellStock(String stockSymbol, int noSahres, int customerId) throws UnauthorizedException {
+        //TODO sell on TradingService
+        return null;
+    }
+
+    @Override
+    public SecuritiesAccount getSecuritiesAccount(int id) throws UnauthorizedException {
+        return securitiesAccountDAO.findById(id);
     }
 
     @RolesAllowed("bank")
-    public List<Customer1> findCustomers(String lastName, String firstName) {
+    public void createCustomerAccount(String firstName, String lastName, String username, Address address, String password, SecuritiesAccount securitiesAccount) throws UnauthorizedException {
+        customerDAO.persist(new Customer(firstName, lastName, username, address, password, securitiesAccount));
+    }
+
+    @RolesAllowed("bank")
+    public List<Customer> findCustomers(String lastName, String firstName) {
         return customerDAO.findCustomers(lastName, firstName);
     }
 
+    @Override
+    public int getBankVolume() throws UnauthorizedException {
+        //TODO Was genau soll hier passieren?
+        //werden hier alle von unseren Kunden gehaltenen Aktienwerte summiert?
+        return 0;
+    }
+
 
     @RolesAllowed("bank")
-    public List<Customer1> findAllCustomers() {
+    public List<Customer> findAllCustomers() {
         return customerDAO.findAllCustomers();
     }
 

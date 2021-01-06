@@ -14,6 +14,7 @@ import javax.persistence.Column;
 @Table(name="Customer")
 public class Customer implements Serializable {
     @Id
+    @GeneratedValue
     private int id;
     @NotEmpty
     @Column
@@ -25,8 +26,11 @@ public class Customer implements Serializable {
     @Column(unique=true)
     private String userName;
     @NotEmpty
-    @OneToMany(mappedBy = "customer")
-    private List<Address> addresses;
+    @OneToOne(mappedBy = "customer")
+    private Address address;
+    @NotEmpty
+    @Column
+    private String password;
     @NotEmpty
     @OneToOne(mappedBy = "customer")
     private SecuritiesAccount securitiesAccount;
@@ -34,12 +38,12 @@ public class Customer implements Serializable {
     public Customer(){
     }
 
-    public Customer(int customerId, String firstName, String lastName, String userName, List<Address> addresses, SecuritiesAccount securitiesAccount) {
-        this.id = customerId;
+    public Customer(String firstName, String lastName, String userName, Address address, String password, SecuritiesAccount securitiesAccount) {
+//        this.id = customerId;
         this.firstName = firstName;
         this.lastName = lastName;
         this.userName = userName;
-        this.addresses = addresses;
+        this.address = address;
         this.securitiesAccount = securitiesAccount;
     }
 
@@ -75,12 +79,12 @@ public class Customer implements Serializable {
         this.userName = userName;
     }
 
-    public List<Address> getAddresses() {
-        return addresses;
+    public Address getAddress() {
+        return address;
     }
 
-    public void setAddresses(List<Address> addresses) {
-        this.addresses = addresses;
+    public void setAddress(Address address) {
+        this.address = address;
     }
 
     public SecuritiesAccount getSecuritiesAccount() {
@@ -89,5 +93,13 @@ public class Customer implements Serializable {
 
     public void setSecuritiesAccount(SecuritiesAccount securitiesAccount) {
         this.securitiesAccount = securitiesAccount;
+    }
+
+    public String getPassword() {
+        return password;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
     }
 }
