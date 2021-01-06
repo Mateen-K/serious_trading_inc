@@ -1,7 +1,7 @@
 package net.froihofer.dsfinance.service;
 
-import net.froihofer.dsfinance.entity.Customer;
-import net.froihofer.dsfinance.entity.CustomerDAO;
+import net.froihofer.dsfinance.entity.Customer1;
+import net.froihofer.dsfinance.dao.CustomerDAO1;
 import net.froihofer.dsfinance.ws.trading.PublicStockQuote;
 import net.froihofer.dsfinance.ws.trading.TradingWSException_Exception;
 import net.froihofer.dsfinance.ws.trading.TradingWebService;
@@ -14,7 +14,6 @@ import javax.ejb.SessionContext;
 import javax.ejb.Stateless;
 import javax.inject.Inject;
 import javax.xml.ws.BindingProvider;
-import java.net.URL;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -27,7 +26,7 @@ public class BankServerImplementation implements BankServerInterface {
     @Resource
     private SessionContext ctx;
     @Inject
-    CustomerDAO customerDAO;
+    CustomerDAO1 customerDAO;
 
     // gets login information so employees can be greeted
     public Map<String, String> getCallerInfo() {
@@ -43,17 +42,17 @@ public class BankServerImplementation implements BankServerInterface {
 
     @RolesAllowed("bank")
     public void createCustomer(String firstName, String lastName) {
-        customerDAO.persist(new Customer(firstName, lastName));
+        customerDAO.persist(new Customer1(firstName, lastName));
     }
 
     @RolesAllowed("bank")
-    public List<Customer> findCustomers(String lastName, String firstName) {
+    public List<Customer1> findCustomers(String lastName, String firstName) {
         return customerDAO.findCustomers(lastName, firstName);
     }
 
 
     @RolesAllowed("bank")
-    public List<Customer> findAllCustomers() {
+    public List<Customer1> findAllCustomers() {
         return customerDAO.findAllCustomers();
     }
 

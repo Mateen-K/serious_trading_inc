@@ -1,6 +1,6 @@
-package net.froihofer.util.jboss.dao;
+package net.froihofer.dsfinance.dao;
 
-import net.froihofer.util.jboss.entity.Address;
+import net.froihofer.dsfinance.entity.Address;
 
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;

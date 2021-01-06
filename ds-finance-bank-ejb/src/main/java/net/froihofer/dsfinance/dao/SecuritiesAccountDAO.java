@@ -1,9 +1,8 @@
-package net.froihofer.util.jboss.dao;
+package net.froihofer.dsfinance.dao;
 
 
-import net.froihofer.util.jboss.entity.Customer;
-import net.froihofer.util.jboss.entity.SecuritiesAccount;
-import net.froihofer.util.jboss.entity.StocksOwned;
+import net.froihofer.dsfinance.entity.Customer;
+import net.froihofer.dsfinance.entity.SecuritiesAccount;
 
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;

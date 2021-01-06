@@ -1,4 +1,4 @@
-package net.froihofer.util.jboss.entity;
+package net.froihofer.dsfinance.entity;
 
 import org.hibernate.validator.constraints.NotEmpty;
 
