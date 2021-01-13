@@ -1,0 +1,68 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:f="http://java.sun.com/jsf/core">
+
+
+<h:head>
+    <title><ui:insert name="title">Serious Trading Inc.</ui:insert></title>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
+          integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous"/>
+
+
+    <nav class="navbar navbar-expand-lg">
+        <div class="container-fluid">
+            <div class="navbar-header">
+                <a class="navbar-brand">
+                    <h:graphicImage value="/resources/images/SeriousTradingInc_Logo.png" width="150" alt="Serious Trading Inc."/>
+                </a>
+            </div>
+            <h:form>
+                <ul class="nav navbar-nav">
+                    <ui:fragment rendered="#{indexJsfBean.callerEmployee}">
+                        <li><h:commandButton class="btn btn-info" action="customerSearch"
+                                             value="Customer Search"/>
+                        </li>
+                        <li><h:commandButton class="btn btn-info" action="createCustomer"
+                                             value="Create Customer"/>
+                        </li>
+                    </ui:fragment>
+                    <ui:fragment rendered="#{indexJsfBean.customerSet}">
+                        <li><h:commandButton class="btn btn-info" action="portfolio" value="Portfolio"/>
+                        </li>
+                    </ui:fragment>
+                    <li><h:commandButton class="btn btn-info" action="getStockQuotes"
+                                         value="Get Stock Quotes"/>
+                    </li>
+                </ul>
+            </h:form>
+        </div>
+    </nav>
+
+    <nav class="navbar fixed-bottom navbar-light bg-light">
+        <a class="navbar-brand" href="#">
+            <ui:fragment rendered="#{indexJsfBean.callerEmployee}">
+                You are logged in as Employee <strong> #{indexJsfBean.employee} </strong>   |
+                Currently Available Volume: <strong> #{indexJsfBean.currentBankVolume}€ </strong>
+            </ui:fragment>
+            <ui:fragment rendered="#{indexJsfBean.customerSet}">
+                    |    Current Customer: <strong> #{indexJsfBean.currentCustomer.firstName} #{indexJsfBean.currentCustomer.lastName}</strong>    |    Current Value: <strong> #{indexJsfBean.currentCustomer.currentValue}€ </strong>
+            </ui:fragment>
+        </a>
+    </nav>
+
+</h:head>
+
+
+<h:body style="margin-bottom:15%;">
+    <f:event type="preRenderView" listener="#{indexJsfBean.updateData()}"/>
+    <div id="content">
+        <ui:insert name="content">
+            [Template content will be inserted here]
+        </ui:insert>
+    </div>
+</h:body>
+</html>

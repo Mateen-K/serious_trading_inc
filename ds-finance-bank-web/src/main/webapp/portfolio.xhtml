@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:f="http://java.sun.com/jsf/core"
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:p="http://java.sun.com/jsf/html"
+                template="/WEB-INF/templates/default.xhtml">
+
+    <ui:define name="content">
+        <f:view>
+            <f:metadata>
+                <f:event type="preRenderView" listener="#{portfolioJsfBean.loadCustomerStocks()}"/>
+            </f:metadata>
+        </f:view>
+        <div class="container-md">
+            <ui:fragment rendered="#{portfolioJsfBean.resultsAvailable}">
+                <h:form>
+                    <table class="table">
+                        <thead>
+                        <tr>
+                            <th>Symbol</th>
+                            <th>Company Name</th>
+                            <th># of Share Owned</th>
+                            <th>Share Value</th>
+                            <th>Value per Company</th>
+                            <th>Updated on</th>
+                            <th>Amount to Sell</th>
+                            <th>Sell</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <ui:repeat var="stock" value="#{portfolioJsfBean.stocks}" varStatus="status">
+                            <tr>
+                                <td>#{stock.symbol}</td>
+                                <td>#{stock.companyName}</td>
+                                <td>#{stock.sharesOwnedNo}</td>
+                                <td>#{stock.shareValue}</td>
+                                <td>#{stock.sharesOwnedNo * stock.shareValue}</td>
+                                <td>#{stock.updatedOn}</td>
+                                <td><p:inputText id="amount" value="#{stock.sharesOwnedNo}">
+                                    <f:validateDoubleRange minimum="1"/>
+                                </p:inputText>
+                                </td>
+                                <td><h:commandButton id="sellSelectedStock" class="btn btn-info"
+                                                     action="#{portfolioJsfBean.sellStock()}"
+                                                     value="Sell">
+                                    <f:setPropertyActionListener value="#{stock}"
+                                                                 target="#{portfolioJsfBean.selectedStock}"/>
+                                </h:commandButton></td>
+                            </tr>
+                        </ui:repeat>
+                        </tbody>
+                    </table>
+                </h:form>
+
+                <ui:fragment rendered="#{portfolioJsfBean.sellComplete}">
+                    <div class="alert alert-primary" role="alert">
+                        Last Sale: #{portfolioJsfBean.selectedStock.sharesOwnedNo} Stocks of #{portfolioJsfBean.selectedStock.companyName} were sold for a value of #{portfolioJsfBean.sellPrice} each.
+                    </div>
+                </ui:fragment>
+
+                <ui:fragment rendered="#{getStockQuotesJsfBean.buyComplete}">
+                    <div class="alert alert-primary" role="alert">
+                        Last Acquisition: #{getStockQuotesJsfBean.selectedCompany.sharesOwnedNo} Stocks of #{getStockQuotesJsfBean.selectedCompany.companyName} were bought for a value of #{getStockQuotesJsfBean.buyPrice} each.
+                    </div>
+                </ui:fragment>
+
+                <ui:fragment rendered="#{portfolioJsfBean.notEnoughStocks}">
+                    <div class="alert alert-primary" role="alert">
+                        Not enough stocks available to sell.
+                    </div>
+                </ui:fragment>
+
+                <ui:fragment rendered="#{portfolioJsfBean.tradingServiceError}">
+                    <div class="alert alert-primary" role="alert">
+                        TradingService Error. Please try again later.
+                    </div>
+                </ui:fragment>
+
+                <ui:fragment rendered="#{portfolioJsfBean.stocks.size() == 0}">
+                    <div class="alert alert-primary" role="alert">
+                        Customer has no Stocks yet
+                    </div>
+                </ui:fragment>
+            </ui:fragment>
+        </div>
+    </ui:define>
+</ui:composition>

@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:f="http://java.sun.com/jsf/core"
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:p="http://java.sun.com/jsf/html"
+                template="/WEB-INF/templates/default.xhtml">
+
+
+    <ui:define name="content">
+        <div class="container-md">
+            <ui:fragment rendered="#{indexJsfBean.callerEmployee}">
+                <h3> Customer Search </h3>
+                <h:form id="df">
+                    <div class="form-group">
+                        <label for="Vorname">Vorname</label>
+                        <p:inputText value="#{customerSearchJsfBean.firstName}" class="form-control"/>
+                    </div>
+                    <div class="form-group">
+                        <label for="Nachname">Nachname</label>
+                        <p:inputText value="#{customerSearchJsfBean.lastName}" class="form-control"/>
+                    </div>
+                    <div class="form-group">
+                        <label for="CustomerId">Kundenummer</label>
+                        <p:inputText value="#{customerSearchJsfBean.customerId}" class="form-control"/>
+                    </div>
+                    <h:commandButton id="searchCustomer" class="btn btn-info"
+                                     action="#{customerSearchJsfBean.lookupCustomer()}"
+                                     value="Search"/>
+                    <hr/>
+                    <h:commandButton id="showAll" class="btn btn-info"
+                                     action="#{customerSearchJsfBean.showAllCustomers()}"
+                                     value="List All Customers"/>
+                </h:form>
+
+                <ui:fragment rendered="#{customerSearchJsfBean.resultsAvailable}">
+                    <h:form id="SelectingCustomer">
+                        <table class="table">
+                            <thead>
+                            <tr>
+                                <th>Kundennummer</th>
+                                <th>Vorname</th>
+                                <th>Nachname</th>
+                                <th>Username</th>
+                                <th>Portfolio Value</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            <ui:repeat var="c" value="#{customerSearchJsfBean.customerResults}" varStatus="status">
+                                <tr>
+                                    <td>#{c.id}</td>
+                                    <td>#{c.firstName}</td>
+                                    <td>#{c.lastName}</td>
+                                    <td>#{c.userName}</td>
+                                    <td>#{c.currentValue}</td>
+                                    <td><h:commandButton id="selectSpecificCustomer" class="btn btn-info"
+                                                         action="#{customerSearchJsfBean.setCustomer}"
+                                                         value="Select">
+                                        <f:setPropertyActionListener target="#{customerSearchJsfBean.selectedCustomer}" value="#{c.userName}" />
+                                    </h:commandButton></td>
+                                </tr>
+                            </ui:repeat>
+                            </tbody>
+                        </table>
+
+                    </h:form>
+
+                </ui:fragment>
+
+            </ui:fragment>
+            <ui:fragment rendered="#{!indexJsfBean.callerEmployee}">
+                <h1> Permission denied. This page is for employees only.</h1>
+            </ui:fragment>
+        </div>
+    </ui:define>
+</ui:composition>
+

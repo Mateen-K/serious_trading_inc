@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:f="http://java.sun.com/jsf/core"
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:p="http://java.sun.com/jsf/html"
+                template="/WEB-INF/templates/default.xhtml">
+
+    <ui:define name="content">
+        <div class="container-md">
+            <h3> Get Stocks </h3>
+            <h:form>
+                <div class="form-group">
+                    <!--@declare id="CompanyName"--><label for="CompanyName">Company Name</label>
+                    <p:inputText value="#{getStockQuotesJsfBean.companyQuery}" class="form-control"/>
+                </div>
+                <h:commandButton id="s" class="btn btn-info" action="#{getStockQuotesJsfBean.findCompanyByName()}"
+                                 value="Search"/>
+            </h:form>
+            <ui:fragment rendered="#{getStockQuotesJsfBean.resultsAvailable}">
+                <h:form>
+                    <table class="table">
+                        <tr>
+                            <th>Firmenname</th>
+                            <th>Symbol</th>
+                            <th>Preis</th>
+                            <ui:fragment rendered="#{indexJsfBean.customerSet}">
+                                <th>Anzahl</th>
+                                <th>Kaufen</th>
+                            </ui:fragment>
+                        </tr>
+                        <tbody>
+                        <ui:repeat var="stock" value="#{getStockQuotesJsfBean.companyResults}" varStatus="status">
+                            <tr>
+                                <td>#{stock.companyName}</td>
+                                <td>#{stock.symbol}</td>
+                                <td>#{stock.shareValue}</td>
+                                <ui:fragment rendered="#{indexJsfBean.customerSet}">
+                                    <td><p:inputText id="amount" value="#{stock.sharesOwnedNo}"/></td>
+                                    <td><h:commandButton id="buySelectedStocks" class="btn btn-info"
+                                                         action="#{getStockQuotesJsfBean.buy()}"
+                                                         value="Buy">
+                                        <f:setPropertyActionListener value="#{stock}"
+                                                                     target="#{getStockQuotesJsfBean.selectedCompany}"/>
+                                    </h:commandButton></td>
+                                </ui:fragment>
+                            </tr>
+                        </ui:repeat>
+                        </tbody>
+                    </table>
+                </h:form>
+
+                <ui:fragment rendered="#{getStockQuotesJsfBean.tradingServiceError}">
+                    <div class="alert alert-primary" role="alert">
+                        TradingService Error. Please try again later.
+                    </div>
+                </ui:fragment>
+            </ui:fragment>
+        </div>
+    </ui:define>
+</ui:composition>

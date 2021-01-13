@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:f="http://java.sun.com/jsf/core"
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:p="http://java.sun.com/jsf/html"
+                template="/WEB-INF/templates/default.xhtml">
+
+    <ui:define name="content">
+        <div class="container-md">
+
+            <ui:fragment rendered="#{createCustomerJsfBean.uniqueId}">
+                <div class="alert alert-primary" role="alert">
+                    Kundennummer is not unique.
+                </div>
+            </ui:fragment>
+
+            <ui:fragment rendered="#{createCustomerJsfBean.uniqueUserName}">
+                <div class="alert alert-primary" role="alert">
+                    Username is not unique.
+                </div>
+            </ui:fragment>
+
+            <ui:fragment rendered="#{indexJsfBean.callerEmployee}">
+                <h3> Create Customer </h3>
+                <h:form>
+                    <div class="form-group">
+                        <label for="Kundennummer">Kundennummer</label>
+                        <p:inputText value="#{createCustomerJsfBean.customer.id}" class="form-control" maxlength="10" size="10"/>
+                    </div>
+                    <div class="form-group">
+                        <label for="Vorname">Vorname</label>
+                        <p:inputText value="#{createCustomerJsfBean.customer.firstName}" class="form-control"/>
+                    </div>
+                    <div class="form-group">
+                        <label for="Nachname">Nachname</label>
+                        <p:inputText value="#{createCustomerJsfBean.customer.lastName}" class="form-control"/>
+                    </div>
+                    <div class="form-group">
+                        <label for="Username">Username</label>
+                        <p:inputText value="#{createCustomerJsfBean.customer.userName}" class="form-control"/>
+                    </div>
+                    <div class="form-group">
+                        <label for="Strasse">Strasse</label>
+                        <p:inputText value="#{createCustomerJsfBean.address.street}" class="form-control"/>
+                    </div>
+                    <div class="form-group">
+                        <label for="Hausnummer">Hausnummer</label>
+                        <p:inputText value="#{createCustomerJsfBean.address.houseNo}" class="form-control"/>
+                    </div>
+                    <div class="form-group">
+                        <label for="Wohnung">Wohnung</label>
+                        <p:inputText value="#{createCustomerJsfBean.address.apartmentNo}" class="form-control"/>
+                    </div>
+                    <div class="form-group">
+                        <label for="PLZ">PLZ</label>
+                        <p:inputText value="#{createCustomerJsfBean.address.zipCode}" class="form-control"/>
+                    </div>
+                    <div class="form-group">
+                        <label for="Stadt">Stadt</label>
+                        <p:inputText value="#{createCustomerJsfBean.address.city}" class="form-control"/>
+                    </div>
+                    <div class="form-group">
+                        <label for="Land">Land</label>
+                        <p:inputText value="#{createCustomerJsfBean.address.country}" class="form-control"/>
+                    </div>
+                    <div class="form-group">
+                        <label for="Password">Password</label>
+                        <p:inputSecret required="true" value="#{createCustomerJsfBean.password}" class="form-control"/>
+                    </div>
+                    <h:commandButton id="createCustomer" class="btn btn-info"
+                                     action="#{createCustomerJsfBean.createCustomer()}"
+                                     value="Create Customer"/>
+                </h:form>
+            </ui:fragment>
+            <ui:fragment rendered="#{!indexJsfBean.callerEmployee}">
+                <h1> Permission denied. This page is for employees only.</h1>
+            </ui:fragment>
+        </div>
+    </ui:define>
+</ui:composition>

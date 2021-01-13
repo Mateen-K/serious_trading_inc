@@ -57,6 +57,7 @@
     <url-pattern>*.xhtml</url-pattern>
   </servlet-mapping>
 
+
   <!-- Welcome files -->
   <welcome-file-list>
     <welcome-file>index.xhtml</welcome-file>

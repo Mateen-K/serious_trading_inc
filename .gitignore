@@ -23,3 +23,11 @@ pom.xml.releaseBackup
 # Default ignored files
 .idea
 *.iml
+
+#h2 database
+/h2/
+
+/h2.mv.db
+/h2.trace.db
+/diverses/
+/path.txt
