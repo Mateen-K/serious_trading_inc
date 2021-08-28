@@ -1,4 +1,4 @@
-package net.froihofer.dsfinance.web.util;
+package net.mateen.dsfinance.web.util;
 
 import javax.naming.InitialContext;
 import javax.naming.NamingException;
@@ -11,8 +11,8 @@ import org.slf4j.LoggerFactory;
  * details about application, module, and distinctName as applicable.
  * For details see the JBoss documentation <a href="https://docs.jboss.org/author/display/AS71/EJB+invocations+from+a+remote+client+using+JNDI">
  * here</a> and <a href="https://docs.jboss.org/author/display/AS71/Remote+EJB+invocations+via+JNDI+-+EJB+client+API+or+remote-naming+project">here</a>.
- * @author Lorenz Froihofer
- * @version $Id: JBoss7JndiLookupHelper.java 1 2020-09-09 20:10:17Z lorenzf $
+ * @author -
+ * @version $Id: JBoss7JndiLookupHelper.java 1 2020-09-09 20:10:17Z - $
  */
 public class JBoss7JndiLookupHelper {
 

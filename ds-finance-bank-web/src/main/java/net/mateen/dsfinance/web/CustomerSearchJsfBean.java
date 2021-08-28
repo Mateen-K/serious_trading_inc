@@ -1,15 +1,12 @@
-package net.froihofer.dsfinance.web;
+package net.mateen.dsfinance.web;
 
-import net.froihofer.dsfinance.entity.Customer;
-import net.froihofer.dsfinance.service.BankServerInterface;
+import net.mateen.dsfinance.entity.Customer;
+import net.mateen.dsfinance.service.BankServerInterface;
 
 import javax.ejb.EJB;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ManagedProperty;
-import javax.faces.bean.RequestScoped;
 import javax.faces.bean.SessionScoped;
-import javax.faces.event.ActionEvent;
-import javax.inject.Inject;
 import java.util.List;
 
 @ManagedBean

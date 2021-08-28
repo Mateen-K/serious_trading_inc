@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<wsdl:definitions xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" xmlns:tns="http://trading.ws.dsfinance.froihofer.net/" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:ns1="http://schemas.xmlsoap.org/soap/http" name="TradingWebServiceService" targetNamespace="http://trading.ws.dsfinance.froihofer.net/">
+<wsdl:definitions xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" xmlns:tns="http://trading.ws.dsfinance.mateen.net/" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:ns1="http://schemas.xmlsoap.org/soap/http" name="TradingWebServiceService" targetNamespace="http://trading.ws.dsfinance.mateen.net/">
   <wsdl:types>
-<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:tns="http://trading.ws.dsfinance.froihofer.net/" attributeFormDefault="unqualified" elementFormDefault="unqualified" targetNamespace="http://trading.ws.dsfinance.froihofer.net/">
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:tns="http://trading.ws.dsfinance.mateen.net/" attributeFormDefault="unqualified" elementFormDefault="unqualified" targetNamespace="http://trading.ws.dsfinance.mateen.net/">
   <xs:element name="buy" type="tns:buy"/>
   <xs:element name="buyResponse" type="tns:buyResponse"/>
   <xs:element name="findStockQuotesByCompanyName" type="tns:findStockQuotesByCompanyName"/>

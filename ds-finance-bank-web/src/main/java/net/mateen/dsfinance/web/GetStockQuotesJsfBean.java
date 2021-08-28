@@ -1,13 +1,12 @@
-package net.froihofer.dsfinance.web;
+package net.mateen.dsfinance.web;
 
-import net.froihofer.dsfinance.entity.Stock;
-import net.froihofer.dsfinance.service.BankServerInterface;
+import net.mateen.dsfinance.entity.Stock;
+import net.mateen.dsfinance.service.BankServerInterface;
 
 import javax.ejb.EJB;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ManagedProperty;
 import javax.faces.bean.SessionScoped;
-import javax.faces.bean.ViewScoped;
 import javax.faces.context.FacesContext;
 import java.io.IOException;
 import java.math.BigDecimal;

@@ -1,4 +1,4 @@
-package net.froihofer.dsfinance.web.util;
+package net.mateen.dsfinance.web.util;
 
 import java.io.IOException;
 import java.util.Arrays;
@@ -15,8 +15,8 @@ import org.slf4j.LoggerFactory;
 
 /**
  *
- * @author Lorenz Froihofer
- * @version $Id: AuthCallbackHandler.java 1 2020-09-09 20:10:17Z lorenzf $
+ * @author -
+ * @version $Id: AuthCallbackHandler.java 1 2020-09-09 20:10:17Z - $
  */
 public class AuthCallbackHandler implements CallbackHandler {
   private static final Logger log = LoggerFactory.getLogger(AuthCallbackHandler.class);

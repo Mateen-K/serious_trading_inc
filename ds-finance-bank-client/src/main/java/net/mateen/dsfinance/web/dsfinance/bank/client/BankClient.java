@@ -1,12 +1,12 @@
-package net.froihofer.dsfinance.web.dsfinance.bank.client;
+package net.mateen.dsfinance.web.dsfinance.bank.client;
 
 import java.util.Properties;
 import javax.naming.Context;
 import javax.naming.InitialContext;
 import javax.naming.NamingException;
 
-import net.froihofer.dsfinance.web.util.AuthCallbackHandler;
-import net.froihofer.dsfinance.web.util.JBoss7JndiLookupHelper;
+import net.mateen.dsfinance.web.util.AuthCallbackHandler;
+import net.mateen.dsfinance.web.util.JBoss7JndiLookupHelper;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -26,7 +26,7 @@ public class BankClient {
     try {
       JBoss7JndiLookupHelper jndiHelper = new JBoss7JndiLookupHelper(new InitialContext(props), "ds-finance-bank-ear", "ds-finance-bank-ejb", "");
       //TODO: Implement the rest of the functionality
-      //THIS TO-DO  IS BY FROIHOFER
+      //THIS TO-DO  IS BY mateen
     }
     catch (NamingException e) {
       log.error("Failed to initialize InitialContext.",e);

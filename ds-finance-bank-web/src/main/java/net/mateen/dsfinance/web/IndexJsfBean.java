@@ -1,7 +1,7 @@
-package net.froihofer.dsfinance.web;
+package net.mateen.dsfinance.web;
 
-import net.froihofer.dsfinance.entity.Customer;
-import net.froihofer.dsfinance.service.BankServerInterface;
+import net.mateen.dsfinance.entity.Customer;
+import net.mateen.dsfinance.service.BankServerInterface;
 
 import javax.ejb.EJB;
 import javax.faces.bean.ManagedBean;
