@@ -1,6 +1,6 @@
 University Project in Distributed Systems.  
 
-Task was to design an implement a banking application (bank server, employee client, customemr client) based on Java EE with a Wildfly Application Server.  
+Task was to design an implement a banking application (bank server, employee client, customer client) based on Java EE with a Wildfly Application Server.  
 
 
 Bank server:  
